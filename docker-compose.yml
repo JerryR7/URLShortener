@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+      - ./sql_app.db:/app/sql_app.db
+    environment:
+      - DATABASE_URL=sqlite:///./sql_app.db
+    networks:
+      - app_network
+
+networks:
+  app_network:
